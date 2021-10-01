@@ -18,7 +18,7 @@ router.get("/", logger, (req, res) => {
 });
 
 router.get("/:id", validateProjectId, logger, (req, res) => {
-  res.status(200).json(req.projectId);
+  res.status(200).json(req.project);
 });
 
 router.post("/", validateProjectBody, logger, (req, res, next) => {

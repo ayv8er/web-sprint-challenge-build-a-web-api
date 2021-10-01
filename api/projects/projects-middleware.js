@@ -12,11 +12,11 @@ function logger(req, res, next) {
 
 async function validateProjectId(req, res, next) {
   try {
-    const validId = await Projects.get(req.params.id);
-    if (!validId) {
+    const validProject = await Projects.get(req.params.id);
+    if (!validProject) {
       next({ status: 404, message: "project not found" });
     } else {
-      req.projectId = validId;
+      req.project = validProject;
       next();
     }
   } catch (err) {
