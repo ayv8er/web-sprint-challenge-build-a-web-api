@@ -6,7 +6,6 @@ const {
   validateProjectBody,
 } = require("./projects-middleware");
 const Projects = require("./projects-model");
-const Actions = require("../actions/actions-model");
 
 const router = express.Router();
 
@@ -42,6 +41,14 @@ router.delete("/:id", validateProjectId, (req, res, next) => {
   Projects.remove(req.params.id)
     .then(() => {
       res.status(204).json({});
+    })
+    .catch(next);
+});
+
+router.get("/:id/actions", validateProjectId, (req, res, next) => {
+  Projects.getProjectActions(req.params.id)
+    .then((actions) => {
+      res.status(202).json(actions);
     })
     .catch(next);
 });
