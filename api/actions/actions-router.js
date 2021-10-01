@@ -32,8 +32,8 @@ router.post("/", validateActionBody, logger, (req, res, next) => {
 
 router.put("/:id", validateActionId, validateActionBody, (req, res, next) => {
   Actions.update(req.params.id, req.body)
-    .then(() => {
-      res.status(202).json();
+    .then((updatedAction) => {
+      res.status(202).json(updatedAction);
     })
     .catch(next);
 });
