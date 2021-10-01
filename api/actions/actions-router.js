@@ -4,6 +4,7 @@ const {
   logger,
   validateActionId,
   validateActionBody,
+  validateProjectExists,
 } = require("./actions-middlware");
 const Actions = require("./actions-model");
 
@@ -25,6 +26,22 @@ router.post("/", validateActionBody, logger, (req, res, next) => {
   Actions.insert(req.body)
     .then((newAction) => {
       res.status(201).json(newAction);
+    })
+    .catch(next);
+});
+
+router.put("/:id", validateActionId, validateActionBody, (req, res, next) => {
+  Actions.update(req.params.id, req.body)
+    .then(() => {
+      res.status(202).json();
+    })
+    .catch(next);
+});
+
+router.delete("/:id", validateActionId, (req, res, next) => {
+  Actions.remove(req.params.id)
+    .then(() => {
+      res.status(204).json({});
     })
     .catch(next);
 });
