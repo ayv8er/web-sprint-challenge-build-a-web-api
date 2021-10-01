@@ -35,8 +35,18 @@ function validateProjectBody(req, res, next) {
   }
 }
 
+function completedCheck(req, res, next) {
+  const { completed } = req.body;
+  if (typeof completed !== "boolean") {
+    next({ status: 400, message: "missing completion status" });
+  } else {
+    next();
+  }
+}
+
 module.exports = {
   logger,
   validateProjectId,
   validateProjectBody,
+  completedCheck,
 };

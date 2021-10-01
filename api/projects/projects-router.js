@@ -4,6 +4,7 @@ const {
   logger,
   validateProjectId,
   validateProjectBody,
+  completedCheck,
 } = require("./projects-middleware");
 const Projects = require("./projects-model");
 
@@ -33,6 +34,7 @@ router.put(
   "/:id",
   validateProjectId,
   validateProjectBody,
+  completedCheck,
   logger,
   (req, res, next) => {
     Projects.update(req.params.id, req.body)
