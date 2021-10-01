@@ -35,4 +35,8 @@ function validateProjectBody(req, res, next) {
   }
 }
 
-module.exports = { logger, validateProjectId, validateProjectBody };
+module.exports = {
+  logger,
+  validateProjectId,
+  validateProjectBody,
+};

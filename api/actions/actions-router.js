@@ -41,6 +41,7 @@ router.put(
   validateActionId,
   validateActionBody,
   validateProjectExists,
+  logger,
   (req, res, next) => {
     Actions.update(req.params.id, req.body)
       .then((updatedAction) => {
@@ -50,7 +51,7 @@ router.put(
   }
 );
 
-router.delete("/:id", validateActionId, (req, res, next) => {
+router.delete("/:id", validateActionId, logger, (req, res, next) => {
   Actions.remove(req.params.id)
     .then(() => {
       res.status(204).json({});
