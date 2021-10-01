@@ -20,7 +20,7 @@ async function validateProjectId(req, res, next) {
       next();
     }
   } catch (err) {
-    next({ status: 500, message: "validating project ID error" });
+    next({ message: "validating project ID error" });
   }
 }
 

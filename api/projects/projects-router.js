@@ -6,7 +6,15 @@ const Actions = require("../actions/actions-model");
 
 const router = express.Router();
 
-router.get("/", validateProjectId, (req, res) => {
+router.get("/", (req, res, next) => {
+  Projects.get()
+    .then((projects) => {
+      res.status(200).json(projects);
+    })
+    .catch({ message: "error retrieving projects" });
+});
+
+router.get("/:id", validateProjectId, (req, res) => {
   res.status(200).json(req.project);
 });
 
