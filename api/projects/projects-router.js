@@ -23,8 +23,8 @@ router.get("/:id", validateProjectId, logger, (req, res) => {
 
 router.post("/", validateProjectBody, logger, (req, res, next) => {
   Projects.insert(req.body)
-    .then((newPost) => {
-      res.status(201).json(newPost);
+    .then((newProject) => {
+      res.status(201).json(newProject);
     })
     .catch(next);
 });
