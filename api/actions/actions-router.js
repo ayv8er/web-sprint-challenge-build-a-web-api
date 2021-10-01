@@ -22,21 +22,33 @@ router.get("/:id", validateActionId, logger, (req, res) => {
   res.status(200).json(req.action);
 });
 
-router.post("/", validateActionBody, logger, (req, res, next) => {
-  Actions.insert(req.body)
-    .then((newAction) => {
-      res.status(201).json(newAction);
-    })
-    .catch(next);
-});
+router.post(
+  "/",
+  validateActionBody,
+  validateProjectExists,
+  logger,
+  (req, res, next) => {
+    Actions.insert(req.body)
+      .then((newAction) => {
+        res.status(201).json(newAction);
+      })
+      .catch(next);
+  }
+);
 
-router.put("/:id", validateActionId, validateActionBody, (req, res, next) => {
-  Actions.update(req.params.id, req.body)
-    .then((updatedAction) => {
-      res.status(202).json(updatedAction);
-    })
-    .catch(next);
-});
+router.put(
+  "/:id",
+  validateActionId,
+  validateActionBody,
+  validateProjectExists,
+  (req, res, next) => {
+    Actions.update(req.params.id, req.body)
+      .then((updatedAction) => {
+        res.status(202).json(updatedAction);
+      })
+      .catch(next);
+  }
+);
 
 router.delete("/:id", validateActionId, (req, res, next) => {
   Actions.remove(req.params.id)

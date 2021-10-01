@@ -44,6 +44,8 @@ async function validateProjectExists(req, res, next) {
     const validProject = await Projects.get(project_id);
     if (!validProject) {
       next({ status: 404, message: "project id not found" });
+    } else {
+      next();
     }
   } catch (err) {
     next(err);
