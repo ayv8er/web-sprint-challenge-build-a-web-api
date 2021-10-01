@@ -30,4 +30,12 @@ router.post("/", validateProjectBody, logger, (req, res, next) => {
     .catch(next);
 });
 
+router.put("/:id", validateProjectId, validateProjectBody, (req, res, next) => {
+  Projects.update(req.params.id, req.body)
+    .then((updatedPost) => {
+      res.status(202).json(updatedPost);
+    })
+    .catch(next);
+});
+
 module.exports = router;
